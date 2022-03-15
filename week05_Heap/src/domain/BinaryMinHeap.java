@@ -19,8 +19,10 @@ public class BinaryMinHeap<E extends Comparable<E>> {
     public E getMin() {
         if (this.isEmpty())
             throw new IllegalStateException("Kan niet zoeken in een lege heap");
-        //TO DO zie oefening 3
-        return null;
+        if (this.values.size() == 0)
+            throw new IllegalArgumentException("Kan niet zoeken in een lege heap");
+        else
+            return this.values.get(0);
     }
 
     public boolean addValue(E value) {
@@ -36,7 +38,29 @@ public class BinaryMinHeap<E extends Comparable<E>> {
     }
 
     private void bubbleUp() {
-        //TO DO : oefening 4
+        int index = this.values.size() - 1;
+        while(heeftOuder(index) && ouder(index).compareTo(values.get(index)) > 0){
+            this.wisselOm(index, ouderIndex(index));
+            index = ouderIndex(index);
+        }
+    }
+
+    private boolean heeftOuder(int i){
+        return i >= 1;
+    }
+
+    private E ouder(int i){
+        return values.get(ouderIndex(i));
+    }
+
+    private int ouderIndex(int i){
+        return (i - 1)/2;
+    }
+
+    private void wisselOm(int i, int j){
+        E hulp = this.values.get(i);
+        this.values.set(i, this.values.get(j));
+        this.values.set(j, hulp);
     }
 
     public E removeSmallest() {
@@ -54,7 +78,7 @@ public class BinaryMinHeap<E extends Comparable<E>> {
     }
 
     public ArrayList<E> getPath(E value) {
-        // TODO zie oefening 6;
+
         return null;
     }
 }
